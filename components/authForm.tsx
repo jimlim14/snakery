@@ -11,11 +11,10 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import { auth } from '../lib/mutations';
 
-const AuthForm: FC<{mode: 'signin' | 'signup'}> = ({mode}) => {
+const AuthForm = ({ mode }: { mode: 'signin' | 'signup' }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
 	function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
 		setEmail(e.target.value);
@@ -29,9 +28,8 @@ const AuthForm: FC<{mode: 'signin' | 'signup'}> = ({mode}) => {
 		e.preventDefault();
 		setIsLoading(true);
 
-		const user = await auth(mode, {email, password});
-    setIsLoading(false);
-    router.push('/');
+		const user = await auth(mode, { email, password });
+		setIsLoading(false);
 	}
 
 	return (
@@ -60,6 +58,6 @@ const AuthForm: FC<{mode: 'signin' | 'signup'}> = ({mode}) => {
 			</Box>
 		</Flex>
 	);
-}
+};
 
 export default AuthForm;
