@@ -7,13 +7,25 @@ import {
 	InputGroup,
 	InputLeftElement,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { auth } from '../lib/mutations';
 
 const AuthForm = ({ mode }: { mode: 'signin' | 'signup' }) => {
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
+
+	function handleFirstNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setFirstName(e.target.value);
+	}
+
+	function handleLastNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setLastName(e.target.value);
+	}
 
 	function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
 		setEmail(e.target.value);
@@ -27,14 +39,29 @@ const AuthForm = ({ mode }: { mode: 'signin' | 'signup' }) => {
 		e.preventDefault();
 		setIsLoading(true);
 
-		const user = await auth(mode, { email, password });
+		const user = await auth(mode, { email, password, firstName, lastName });
 		setIsLoading(false);
+		router.push('/');
 	}
 
 	return (
 		<Flex justify={'center'}>
 			<Box width='50%'>
 				<form onSubmit={handleSubmit}>
+					{mode === 'signup' && (
+						<>
+							<Input
+								placeholder='First Name'
+								type='firstName'
+								onChange={handleFirstNameChange}
+							/>
+							<Input
+								placeholder='Last Name'
+								type='lastName'
+								onChange={handleLastNameChange}
+							/>
+						</>
+					)}
 					<InputGroup>
 						<InputLeftElement>
 							<EmailIcon />
@@ -51,7 +78,7 @@ const AuthForm = ({ mode }: { mode: 'signin' | 'signup' }) => {
 						onChange={handlePasswordChange}
 					/>
 					<Button type='submit' bg={'red'} isLoading={isLoading}>
-						signup
+						{mode}
 					</Button>
 				</form>
 			</Box>
