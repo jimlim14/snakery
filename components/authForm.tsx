@@ -7,8 +7,7 @@ import {
 	InputGroup,
 	InputLeftElement,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { auth } from '../lib/mutations';
 
 const AuthForm = ({ mode }: { mode: 'signin' | 'signup' }) => {
