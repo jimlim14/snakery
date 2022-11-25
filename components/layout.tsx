@@ -1,6 +1,7 @@
 import { Box, Flex, ButtonGroup, Button, Spacer } from '@chakra-ui/react';
 import { Layout } from '../interface/Layout';
 import Header from './header';
+import Sidebar from './sidebar';
 
 const Layout = ({ children }: Layout) => {
 	return (
@@ -15,13 +16,26 @@ const Layout = ({ children }: Layout) => {
 			>
 				<Header />
 			</Box>
-			<Box position='absolute' top='150px' left='0' bg='green'>
-				sidebar
+			<Box
+				position='absolute'
+				height='calc(100vh - 300px)'
+				width='150px'
+				top='150px'
+				left='0'
+				bg='green'
+			>
+				<Sidebar />
 			</Box>
-			<Box position='absolute' left='100px' top='150px'>
+			<Box position='absolute' left='150px' top='150px'>
 				{children}
 			</Box>
-			<Box position='absolute' bottom='0' height='150px' bg='yellow'>
+			<Box
+				width='100%'
+				position='absolute'
+				bottom='0'
+				height='150px'
+				bg='yellow'
+			>
 				footer
 			</Box>
 		</Box>
