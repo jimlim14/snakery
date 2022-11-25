@@ -13,7 +13,7 @@ const Header = () => {
           <Link href='/signup'>Sign Up</Link>
         </Button>
 		    <Button colorScheme='teal'>
-          <Link href='/login'>Log In</Link>
+          <Link href='/signin'>Log In</Link>
         </Button>
 		  </ButtonGroup>
 		</Flex>
