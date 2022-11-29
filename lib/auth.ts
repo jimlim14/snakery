@@ -23,9 +23,12 @@ export const validateRoute = (handler: Function) => {
         return;
       }
 
-      return handler(req, res, user);
+			if (token === user?.token) {
+				return handler(req, res, user);
+			}
+
 		}
 
-    res.status(401).json({ error: 'Not Authorized'});
+		res.status(401).json({ error: 'Not Authorized' });
 	};
 };
