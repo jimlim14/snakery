@@ -17,6 +17,7 @@ const AuthForm = ({ mode }: { mode: 'signin' | 'signup' }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState('');
 	const router = useRouter();
 
 	function handleFirstNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -40,8 +41,13 @@ const AuthForm = ({ mode }: { mode: 'signin' | 'signup' }) => {
 		setIsLoading(true);
 
 		const user = await auth(mode, { email, password, firstName, lastName });
-		setIsLoading(false);
-		router.push('/');
+		if (!user.error) {
+			setIsLoading(false);
+			router.push('/');
+		} else {
+			setIsLoading(false);
+			setError(user.error);
+		}
 	}
 
 	return (
@@ -80,6 +86,7 @@ const AuthForm = ({ mode }: { mode: 'signin' | 'signup' }) => {
 					<Button type='submit' bg={'red'} isLoading={isLoading}>
 						{mode}
 					</Button>
+					{error && <>{error}</>}
 				</form>
 			</Box>
 		</Flex>
