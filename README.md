@@ -1,4 +1,5 @@
-This is a NextJs project that I am currently building at the moment.
+This is a NextJs project that I am currently building at the moment. It brings back the good old 90s snake game we used to play on Nokia 3310. :)
+Below are the readme boiler plate from NextJs.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
